@@ -1,0 +1,65 @@
+// ***** Import Section ***** //
+import org.gradle.api.tasks.Exec
+import org.apache.tools.ant.taskdefs.condition.Os
+
+// ***** Properties Section ***** //
+project.ext {
+  projProjectName = propProjectName
+  projOrgSourceDirName = propOrgSourceDirName
+  projSourceDirName = propSourceDirName
+  projDestiDirName = propDestiDirName
+  projUsername = propUsername
+  projPassword = propPassword
+  projSharingUser = propSharingUser
+}
+
+// Creating a IONIC Project for iOS App Generation
+task createProject << {
+  println '\nStarted generating iOS application!'
+  copy {
+    from projOrgSourceDirName
+    into projProjectName
+  }
+  println 'Created new project!'
+}
+
+// Replacing WebContent Source Files to IONIC Project
+task replaceSourceFiles(dependsOn: 'createProject') << {
+  println 'Replacing the project source files...'
+  copy {
+    from projSourceDirName
+    into projDestiDirName
+  }
+  println 'Replaced source files!'
+}
+
+// Updating the IONIC Libraries to Latest Version
+task updateTheLibs(dependsOn: 'replaceSourceFiles') << {
+  println 'Updating the libraries...'
+  exec {
+    workingDir = projProjectName
+    commandLine 'ionic', 'lib', 'update'
+  }
+  println 'Libraries are updated!'
+}
+
+// Uploading IONIC Project to the IONIC Server
+task uploadProject(dependsOn: 'updateTheLibs') << {
+  println 'Uploading the project to server...'
+  exec {
+    commandLine 'ionic', 'login', '--email', projUsername, '--password', projPassword
+  }
+  exec {
+    workingDir = projProjectName
+    commandLine 'ionic', 'upload'
+  }
+}
+
+// Sharing the Android Application to the Customer
+task shareTheApp(dependsOn: 'uploadProject') << {
+  println 'Sharing the Application...'
+  exec {
+    workingDir = projProjectName
+    commandLine 'ionic', 'share', projSharingUser
+  }
+}
