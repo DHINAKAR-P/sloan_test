@@ -20,7 +20,7 @@ task createProject << {
     from projOrgSourceDirName
     into projProjectName
   }
-  println 'Created new project!'
+  println 'Created new project!' 
 }
 
 // Replacing WebContent Source Files to IONIC Project
