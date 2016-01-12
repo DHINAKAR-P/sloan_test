@@ -16,7 +16,6 @@ public class SignUpServiceimpl implements SignUpService {
 
 	@Override
 	public User update(User SignUp) throws Exception {
-		// TODO Auto-generated method stub
 		return signUpDao.update(SignUp);
 		
 	}

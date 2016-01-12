@@ -18,7 +18,7 @@ public class User {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String userName;
+	private String email;
 	private String firstName;
 	private String lastName;
 	private long phoneNumber;
@@ -27,6 +27,7 @@ public class User {
 	@Column(name = "user_type")
 	@Enumerated(EnumType.STRING)
 	private UserType userType;
+	private boolean isLoggedIn;
 
 	public Long getId() {
 		return id;
@@ -34,14 +35,6 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getPassWord() {
@@ -91,11 +84,29 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
+
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", phoneNumber="
-				+ phoneNumber + ", passWord=" + passWord + ", oldPassword="
-				+ oldPassword + ", userType=" + userType + "]";
+		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", phoneNumber=" + phoneNumber + ", passWord=" + passWord + ", oldPassword=" + oldPassword
+				+ ", userType=" + userType + ", isLoggedIn=" + isLoggedIn + "]";
 	}
+
 }

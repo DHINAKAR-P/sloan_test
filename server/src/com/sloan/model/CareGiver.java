@@ -25,15 +25,26 @@ public class CareGiver {
 	private Date dateOfBirth;
 	private String email;
 	private String password;	
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private User user;
 	private int yearOfExperience;
 	private String languageKnown;
 	private String description;
-	 
+	private String education;
+	private boolean workPermit;
 	
-	
-	
+	public String getEducation() {
+		return education;
+	}
+	public void setEducation(String education) {
+		this.education = education;
+	}
+	public boolean isWorkPermit() {
+		return workPermit;
+	}
+	public void setWorkPermit(boolean workPermit) {
+		this.workPermit = workPermit;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -93,6 +104,13 @@ public class CareGiver {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	@Override
+	public String toString() {
+		return "CareGiver [id=" + id + ", firstName=" + firstName + ", lastname=" + lastname + ", dateOfBirth="
+				+ dateOfBirth + ", email=" + email + ", password=" + password + ", user=" + user + ", yearOfExperience="
+				+ yearOfExperience + ", languageKnown=" + languageKnown + ", description=" + description
+				+ ", education=" + education + ", workPermit=" + workPermit + "]";
 	}
 
 }

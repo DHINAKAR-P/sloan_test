@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,11 +18,11 @@ public class OrganisationController {
 
 	@Autowired
 	private OrganisationServiceImpl orgserviceimpl;
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/getAllOrg/", headers = "Accept=application/json")
 	@ResponseBody
 	public List<Organisation> getAllOrganisation() {
-		List<Organisation> organisationList =orgserviceimpl.getAllOrganisation();
+		List<Organisation> organisationList = orgserviceimpl.getAllOrganisation();
 		return organisationList;
 	}
 
@@ -31,7 +30,6 @@ public class OrganisationController {
 	@ResponseBody
 	public Organisation findOrganisationByName(@RequestParam("organisationId") long organisationId) {
 		Organisation orgListForName = orgserviceimpl.findOrganisationByName(organisationId);
-		System.out.println(orgListForName);
 		return orgListForName;
 	}
 
