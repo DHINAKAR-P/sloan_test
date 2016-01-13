@@ -27,13 +27,11 @@
 		$scope.SaveCareGiver = function(careGiverForm,CareGiverDetails) {
 			$log.log("Inside the customer Details controller");
 			if (careGiverForm.$valid) {
-					var careGiver = "http://localhost:8080/sloan_test/careGiver/create"
+					//var careGiver = "http://localhost:8080/sloan_test/careGiver/create"
+				var careGiver = "http://45.55.156.148:8080/sloan_test/careGiver/create"
 					$log.log("Inside the customer Details checking",angular.toJson(CareGiverDetails));
 					
 					$scope.CareGiverDetails.user=userService.UserObject;
-					console.log("only user value from service--",angular.toJson($scope.CareGiverDetails.user));
-					
-					console.log("Objectv to persits---",angular.toJson($scope.CareGiverDetails));
 					
 					$http({
 						method:"POST",

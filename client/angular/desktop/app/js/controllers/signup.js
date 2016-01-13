@@ -21,7 +21,9 @@
 						userSignUpDetails.firstName != null || userSignUpDetails.firstName != "" &&
 						userSignUpDetails.lastName != null || userSignUpDetails.lastName != "" &&
 						userSignUpDetails.phoneNumber != null || userSignUpDetails.phoneNumber != "") {
-					var signUp = "http://localhost:8080/sloan_test/signup/create"
+					//var signUp = "http://localhost:8080/sloan_test/signup/create"
+					var signUp = "http://45.55.156.148:8080/sloan_test/signup/create"
+					
 					$log.log("Inside the doSignUp() Details cheking---",angular.toJson(userSignUpDetails));
 					
 					userService.UserObject=userSignUpDetails;
