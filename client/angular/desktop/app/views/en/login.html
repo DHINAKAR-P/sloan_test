@@ -1,19 +1,11 @@
 
-<!-- <style>
+<style>
  
 body {
 	padding-top: 50px;
 }
-</style> -->
+</style> 
 <div class="container" >
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-
-			<img class="img-circle img-responsive center-block"
-				src="//placehold.it/200"> <br>
-			<br>
-		</div>
-	</div>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<div class="well">
@@ -22,13 +14,13 @@ body {
 					<div class="form-group">
 						<label class="control-label">E-Mail</label> <input
 							class="form-control" id="inputSuccess1"
-							data-ng-model="userDetails.emailAddress"
+							data-ng-model="userDetails.email"
 							placeholder="sloan@gmail.com" type="text">
 					</div>
 					<div class="form-group">
 						<label for="inputPassword" class="control-label">Password</label>
 						<input class="form-control" id="inputSuccess2"
-							data-ng-model="userDetails.password" placeholder="******"
+							data-ng-model="userDetails.passWord" placeholder="******"
 							type="password">
 					</div>
 					<div class="form-group">
@@ -46,7 +38,7 @@ body {
 							</div>
 						</div>
 						<div class="col-xs-6 col-md-4">
-							<button type="button" class="btn btn-link  pull-right small">Register
+							<button type="button" data-ng-click="signUpLocation()" class="btn btn-link  pull-right small">Register
 								new Account</button>
 						</div>
 					</div>

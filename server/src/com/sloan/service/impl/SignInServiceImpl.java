@@ -1,5 +1,7 @@
 package com.sloan.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,50 +25,27 @@ public class SignInServiceImpl implements SignInService {
 
 	@Override
 	public Object isValidLogin(User user) throws Exception {
-		String email = user.getEmail();
-		String passWord = user.getPassWord();
-		// System.err.println("Email Addrs "+email);
-		User userObj = signInDao.isValidLogin(user);
-		Object object;
-		if (userObj.getEmail().equals(email) && userObj.getPassWord().equals(passWord)) {
+		List<User> userObj = signInDao.isValidLogin(user);
+		System.out.println("first-----" + userObj.toString());
+		Object object = null;
+		if (userObj.size() > 0) {
 			System.out.println("login successfull");
-			User useObj = userObj;
-			useObj.setLoggedIn(true);
-			userObj = signUpDao.update(useObj);
-			if (userObj.getUserType().name() == "CUSTOMER") {
-				Customer customer = signInDao.getCustomer(userObj.getId());
+			User useObji = userObj.get(0);
+			System.out.println("object in list---" + useObji.toString());
+			useObji.setLoggedIn(true);
+			User Obj = signUpDao.update(useObji);
+			if (Obj.getUserType().name() == "CUSTOMER") {
+				List<Customer> customer = signInDao.getCustomer(Obj.getId());
 				object = customer;
 			} else {
-				CareGiver care = signInDao.getCareGiver(userObj.getId());
+				List<CareGiver> care = signInDao.getCareGiver(Obj.getId());
 				object = care;
 			}
 		} else {
 			System.out.println("login failed");
-			object = "login failed";
+			object = "failed";
 		}
 		return object;
 	}
-	/*
-	 * public Object loginValidation(User user) {
-	 * 
-	 * User userObject = signInDao.loginValidation(user); Object object; if
-	 * (userObject.getEmail().equals(user.getEmail()) &&
-	 * userObject.getPassWord().equals(user.getPassWord())) {
-	 * 
-	 * System.out.println("login successfull");
-	 * 
-	 * User userObject =
-	 * 
-	 * if (userObject.getUserType().name() == "CUSTOMER") {
-	 * 
-	 * Customer customer = signInDao.getCustomer(userObject.getId()); object =
-	 * customer;
-	 * 
-	 * } else { CareGiver care = signInDao.getCareGiver(userObject.getId());
-	 * object = care; } } else { System.out.println("login failed"); object =
-	 * "login failed"; } userObject = null; return object;
-	 * 
-	 * }
-	 */
 
 }

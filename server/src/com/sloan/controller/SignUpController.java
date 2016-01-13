@@ -18,7 +18,7 @@ public class SignUpController {
 	@Autowired
 	private SignUpServiceimpl signUpService;
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/create/", headers = "Accept=application/json")
+	@RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
 	@ResponseBody
 	public User create(@RequestBody User SignUp) throws Exception {
 		return signUpService.create(SignUp);

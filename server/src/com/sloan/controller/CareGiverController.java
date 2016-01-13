@@ -19,21 +19,21 @@ public class CareGiverController {
 	@Autowired
 	CareGiverService careService;
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/create/", headers = "Accept=application/json")
+	@RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
 	@ResponseBody
 	public CareGiver create(@RequestBody CareGiver careGiver) throws Exception {
 		System.out.println("care giver in controller"+careGiver.toString());
 		return careService.create(careGiver); 
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/update/", headers = "Accept=application/json")
+	@RequestMapping(method = RequestMethod.POST, value = "/update", headers = "Accept=application/json")
 	@ResponseBody
 	public CareGiver update(@RequestBody CareGiver careGiver) throws Exception {
 		return careService.update(careGiver);
 	}
 	 
 
-	@RequestMapping(method = RequestMethod.GET, value = "/search/", headers = "Accept=application/json")
+	@RequestMapping(method = RequestMethod.GET, value = "/search", headers = "Accept=application/json")
 	@ResponseBody
 	public CareGiver search(@RequestParam("id") long id) throws Exception {
 		 return careService.search(id);

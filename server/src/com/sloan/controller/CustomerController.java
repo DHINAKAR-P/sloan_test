@@ -18,20 +18,20 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 
-	@RequestMapping(method = RequestMethod.POST, value = "/create/", headers = "Accept=application/json")
+	@RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
 	@ResponseBody
 	public Customer create(@RequestBody Customer careGiver) throws Exception {
 		System.out.println("care giver in controller" + careGiver.toString());
 		return customerService.create(careGiver);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/update/", headers = "Accept=application/json")
+	@RequestMapping(method = RequestMethod.POST, value = "/update", headers = "Accept=application/json")
 	@ResponseBody
 	public Customer update(@RequestBody Customer careGiver) throws Exception {
 		return customerService.update(careGiver);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/search/", headers = "Accept=application/json")
+	@RequestMapping(method = RequestMethod.GET, value = "/search", headers = "Accept=application/json")
 	@ResponseBody
 	public Customer search(@RequestParam("id") long id) throws Exception {
 		return customerService.search(id);

@@ -19,19 +19,8 @@ public class SignUpDao {
 
 	@Transactional
 	public User create(User SignUp) throws Exception {
-		System.out.println("we hit dao---"+SignUp.toString());
-	/*	User SignUp = new User();
-		SignUp.setFirstName(user.getFirstName());
-		SignUp.setLastName(user.getLastName());
-		SignUp.setUserName(user.getUserName());
-		SignUp.setPassWord(user.getPassWord());
-		SignUp.setOldPassword(user.getOldPassword());
-		SignUp.setPhoneNumber(user.getPhoneNumber());
-		SignUp.setUserType(user.getUserType());*/
-		
 		entityManager.persist(SignUp);
 		entityManager.flush();
-		//entityManager.detach(SignUp);
 		return SignUp;
 	}
 
