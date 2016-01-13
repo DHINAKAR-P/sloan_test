@@ -25,7 +25,7 @@
 						CustomerDetails.gender != null || CustomerDetails.gender != "" &&
 						CustomerDetails.name != null || CustomerDetails.name != "") {
 					//var customer = "http://localhost:8080/sloan_test/customer/create"
-					var customer = "http://45.55.156.148:8080/sloan_test/customer/create"
+					var customer = "http://45.55.156.148:8080/Sloan_App_test/customer/create"
 						
 					$log.log("Inside the customer Details checking",angular.toJson(CustomerDetails));
 					$scope.CustomerDetails.user=userService.UserObject;
