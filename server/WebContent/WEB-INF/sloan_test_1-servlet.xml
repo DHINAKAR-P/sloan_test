@@ -72,7 +72,7 @@
 			<beans:value>gepuser</beans:value>
 		</beans:property>
 		<beans:property name="password">
-			<beans:value>Password123_</beans:value>
+			<beans:value>tang3456</beans:value>
 		</beans:property>
 	</beans:bean>
 
