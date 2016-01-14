@@ -13,9 +13,9 @@
  *
 */
 
-DROP DATABASE IF EXISTS sloan_test_Dhina;
+DROP DATABASE IF EXISTS sloan_test_1;
 
-CREATE DATABASE sloan_test_Dhina
+CREATE DATABASE sloan_test_1
 DEFAULT CHARACTER SET utf8
 COLLATE utf8_general_ci
 
