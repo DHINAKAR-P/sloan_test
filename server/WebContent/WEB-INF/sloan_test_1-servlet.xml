@@ -69,10 +69,10 @@
 			<beans:value>jdbc:mysql://localhost:3306/sloan_test_1</beans:value>
 		</beans:property>
 		<beans:property name="username">
-			<beans:value>gepuser</beans:value>
+			<beans:value>test</beans:value>
 		</beans:property>
 		<beans:property name="password">
-			<beans:value>tang3456</beans:value>
+			<beans:value>test</beans:value>
 		</beans:property>
 	</beans:bean>
 
