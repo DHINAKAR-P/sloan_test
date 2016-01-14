@@ -66,13 +66,13 @@
 			<beans:value>com.mysql.jdbc.Driver</beans:value>
 		</beans:property>
 		<beans:property name="url">
-			<beans:value>jdbc:mysql://localhost:3306/sloanobj</beans:value>
+			<beans:value>jdbc:mysql://localhost:3306/sloan_test_1</beans:value>
 		</beans:property>
 		<beans:property name="username">
-			<beans:value>sloan</beans:value>
+			<beans:value>gepuser</beans:value>
 		</beans:property>
 		<beans:property name="password">
-			<beans:value>sloan</beans:value>
+			<beans:value>Password123_</beans:value>
 		</beans:property>
 	</beans:bean>
 
