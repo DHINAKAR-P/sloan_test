@@ -13,7 +13,7 @@
  *
 */
 
-app = angular.module('Sloan_test_1', ['ionic'])
+app = angular.module('Sloan_test_1', ['ionic','social','Sloan_test_11'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -63,7 +63,7 @@ app = angular.module('Sloan_test_1', ['ionic'])
 
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/First_time_setup-en');
+  $urlRouterProvider.otherwise('/home');
 
 })
 
@@ -118,13 +118,13 @@ app = angular.module('Sloan_test_1', ['ionic'])
 		name: "Authentication",
 		label: "login",
 		id: 183,
-		screens: 		]	},
+		screens: [		]	},
 	{
 		is_first_level: true,
 		name: "MailChimp Activity",
 		label: "MailChimp",
 		id: 184,
-		screens: 		]	}
+		screens: [		]	}
 ];
 var getByParentId = function(id) {
 	for (var i in top_menu_items) {
@@ -143,3 +143,84 @@ $scope.showTopLevelCategories = function () {
 };
 }])
 ;
+
+
+
+
+
+
+angular.module('social', ['ionic'])
+
+.config(function ($stateProvider, $urlRouterProvider) {
+//FacebookProvider.init('1008436239221044');
+  $stateProvider
+    .state('home', {
+      url: '/home',
+      controller: 'HomeController',
+	  templateUrl: 'app/views/home/home.html'	  
+    });
+
+//S.A	
+	
+	$stateProvider
+    .state('organization', {
+      url: '/organization',
+	  controller: 'IntroController',
+	  templateUrl: 'app/views/organisations/organization.html'   
+    });
+	
+	
+	
+	$stateProvider
+    .state('profile', {
+      url: '/profile',
+	  //controller: 'IntroController',
+	  templateUrl: 'app/views/profile'   
+    });
+	
+//S.A	
+
+  $urlRouterProvider.otherwise('/home');
+})
+
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if(window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+  });
+});
+
+angular.module('Sloan_test_11', ['ngRoute', 'ngCookies', 'ui.bootstrap',
+    'ui.grid', 'ui.grid.pagination', 'ui.grid.resizeColumns', 'ui.grid.edit'])
+
+.config(function ($routeProvider) {
+    $routeProvider
+        .when('/organization/', {
+            templateUrl: 'app/views/en-US/user/organization.html',
+            controller: 'OrganizationController'
+        })
+        .when('/First_time_setup-en/', {
+            templateUrl: 'app/views/en/First_time_setup-en.html',
+            controller: 'First_time_setup'
+        })
+        .when('/en-US/user/profile/', {
+            templateUrl: 'app/views/en-US/user/profile.html',
+            controller: 'Landing_page'
+        })
+        .when('/en-US/campaigns/', {
+            templateUrl: 'app/views/en-US/user/campaigns.html',
+            controller: 'CampaignController'
+        })
+        .when('/en-US/campaign/:action/', {
+            templateUrl: 'app/views/en-US/user/campaign.html',
+            controller: 'CampaignController'
+        })
+        .otherwise({
+
+        });
+});
+
