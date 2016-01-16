@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "sloanproject-1187",
+    "project_number": "232289604333",
+    "name": "SloanProject"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232289604333:android:525ff7ff906e892d",
+        "client_id": "android:com.ionicframework.social181944",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.ionicframework.social181944"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232289604333-kt28odqb1n7roktm40h79hq0nrpmtb69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionicframework.social181944",
+            "certificate_hash": "2B1D173408DDE3E3C9B3F0DB3423EB68717C71E2"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

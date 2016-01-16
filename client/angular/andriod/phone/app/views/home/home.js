@@ -5,8 +5,8 @@
  */
 
 angular.module('social')
-.controller('HomeController', ['$log', '$scope', '$http', '$location','$ionicPopup', '$timeout','$ionicLoading','$q','$state',
-    function ($log, $scope, $http, $location,$ionicPopup, $timeout,$ionicLoading,$q,$state) {
+.controller('HomeController', ['$log', '$scope', '$http', '$location','$ionicPopup', '$timeout','$ionicLoading','$q','$state','$window',
+    function ($log, $scope, $http, $location,$ionicPopup, $timeout,$ionicLoading,$q,$state,$window) {
 
         var self = $scope;
 
@@ -100,106 +100,30 @@ angular.module('social')
 		
 		/*.......FB END ......*/
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-    
         /**
          * G+ login implementation
          */
-        $scope.gplusLogin = function(callback)
-			{
-				 $scope.clientId = "232289604333-g287c7f4j04tjocmfkr6l4nid4pcm52r.apps.googleusercontent.com";
-				 gapi.auth.signIn({
-		    	      'callback': function(authResult){
-		    	    	  $scope.signinCallback(authResult, callback);
-		    	      },
-		    	      'clientid': $scope.clientId,
-		    	      'cookiepolicy': 'single_host_origin',
-		    	      'data-accesstype':'offline',
-		    	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
-		    	      'data-requestvisibleactions': 'http://schemas.google.com/AddActivity'
-		    	    });
-			}
-			
-			$scope.signinCallback= function(authResult, callback) {
-				
-				if (authResult['status']['signed_in']) {
-					gapi.client.load('plus','v1', function(){ 
-		                var request = gapi.client.plus.people.get({'userId' : 'me'});
-		                request.execute(function(response) {
-		                    var email = '';
-						    if(response['emails'])
-						    {
-						        for(i = 0; i < response['emails'].length; i++)
-						        {
-						            if(response['emails'][i]['type'] == 'account')
-						            {
-						                email = response['emails'][i]['value'];
-						            }
-						        }
-						    }
-		                    //send response to server
-							$scope.showAlert("gmail connected");
-							$location.url('/app/First_time_setup-en');
-		                    //gotoServer(email,response.displayName,'gplus');
-		                });
-		            });
-
-				} else if (authResult['error']) {
-					console.log("G+ NOT CONNECTED");
-				  }
-			}
-
-		/**
-		 * This method checks if email address of signed in FB user exists or not,
-		 * if not then it will ask for the same in a modal window.
-		 */
-		$scope.modalData ={};
-		$scope.fb={};
-		
-		/**
-		 * after social sign in go to server for creation of new user if not exist
-		 * 
-		 */
-		
-		function gotoServer(email, name, type){
-			var urlPart = "/login/create_user/";
-			var dataToPost = {
-					username: email
-			};
-			$http({
-				method : 'POST',
-				url : RestURL.baseURL + urlPart,
-				data: dataToPost,
-				headers : {
-					"content-type" : "application/json",
-					"Accept" : "application/json"
-				},
-			}).success(function(data) {
-    				var user = data;
-    				console.log(angular.toJson(data));
-    				authFactory.setUser(user);
-    				$location.url("/en-US/social/success");
-    		}).error(function(){ 	
-    			console.log("ERROR WITH SOCIAL SIGNIN");
-    			$location.url("/en-US/social/success");
-    		});
-
-		}
-
-        self.init();
+		 
+   $scope.isAvailable =function () {
+    $window.plugins.googleplus.isAvailable(function(avail) {
+	$scope.showAlert(avail);});
+  }
+  
+  $scope.login = function () {
+  $ionicLoading.show();
+    $window.plugins.googleplus.login(
+        {},
+        function (obj) {
+          $scope.showAlert("SUCCESS LOGIN: "+obj.email);
+		  $ionicLoading.hide();
+          //document.querySelector("#feedback").innerHTML = "Hi, " + obj.displayName + ", " + obj.email;
+        },
+        function (msg) {
+          $scope.showAlert("ERROR: "+msg);
+        }
+    );
+  }
+  self.init();
 
 $scope.showAlert = function(msg) {
 
@@ -219,4 +143,4 @@ $scope.showAlert = function(msg) {
 
 };
 
-    }]);
+}]);
