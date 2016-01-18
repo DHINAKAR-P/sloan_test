@@ -759,7 +759,7 @@ html, body {
 
 /* modal margin fixes
    Modified : July 15 2015
-   @Author: pravin 
+   @Author: pravin
 */
 .modal-dialog {
     margin-top: 100px;
@@ -811,4 +811,8 @@ html, body {
 
 .app .ionic.list {
     width: auto;
+}
+
+.sloan {
+  background: linear-gradient(90deg, #3a7bd5, #0fbaf3);
 }

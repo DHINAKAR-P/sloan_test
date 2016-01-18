@@ -1,0 +1,22 @@
+<ion-view view-title="Sign Up" hide-back-button="false">
+  <ion-content>
+    <div class="content has-header">
+      <div class="padding">
+        <h3>Create an account</h3>
+      </div>
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email</span>
+          <input type="text" data-ng-model="$parent.email" placeholder="email@example.com">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Password</span>
+          <input type="password" data-ng-model="$parent.password" placeholder="**********">
+        </label>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive" data-ng-click="signUp()">Sign Up</button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
