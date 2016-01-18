@@ -11,6 +11,20 @@ app.controller('IntroController', ['$scope', '$location', '$http', 'RestURL', 'S
     $http.get(RestURL.baseURL + 'sloan_test/organization/getAllOrg/')
         .success(function (response) {
             self.organizations = response;
+            self.organizations = [
+              {
+                organisationName: 'Kappa Alpha Theta'
+              },
+              {
+                organisationName: 'Alpha Omicron Pi'
+              },
+              {
+                organisationName: 'Delta Tau Delta'
+              },
+              {
+                organisationName: 'Kappa Sigma'
+              }
+            ];
         })
         .error(function (error) {
             console.warn(error);
