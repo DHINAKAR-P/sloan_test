@@ -13,9 +13,11 @@
  *
  */
 
-var app = angular.module('Sloan', ['ionic', 'social', 'Sloan_test_11'])
+var app = angular.module('Sloan', ['ionic', 'social', 'Sloan_test_11','openfb'])
 
-  .run(function ($ionicPlatform) {
+  .run(function ($ionicPlatform,OpenFB) {
+
+    OpenFB.init('1008436239221044');
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)

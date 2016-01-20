@@ -13,8 +13,8 @@
  *
  */
 
-app.controller('Authentication', ['$scope', '$rootScope', '$location', '$state', '$window', '$q', '$http', '$ionicPopup', 'RestURL', 'People_testId',
-  function ($scope, $rootScope, $location, $state, $window, $q, $http, $ionicPopup, RestURL, People_testId) {
+app.controller('Authentication', ['$scope', '$rootScope', '$location', '$state', '$window', '$q', '$http', '$ionicPopup', 'RestURL', 'People_testId','OpenFB',
+  function ($scope, $rootScope, $location, $state, $window, $q, $http, $ionicPopup, RestURL, People_testId,OpenFB) {
     var self = $scope;
 
     self.signIn = function () {
@@ -87,4 +87,42 @@ app.controller('Authentication', ['$scope', '$rootScope', '$location', '$state',
       $state.go(url);
     };
 
+	$scope.facebookLogin = function () {
+		 OpenFB.login('email').then(
+                function () {                    
+					OpenFB.get('/me').success(function (user) {
+						$scope.showAlert("FB login succeeded"+user.id);							
+					});					
+                },
+                function (msg) {
+                    $scope.showAlert("OpenFB login failed"+msg);
+                });
+        };
+
+		
+		$scope.gpluslogin = function () {
+  
+			$window.plugins.googleplus.login(
+				{},
+				function (obj) {
+				  $scope.showAlert("SUCCESS LOGIN: "+obj.email);
+				  //document.querySelector("#feedback").innerHTML = "Hi, " + obj.displayName + ", " + obj.email;
+				},
+				function (msg) {				
+				  $scope.showAlert("ERROR: "+msg);
+				}
+			);
+	}
+	
+	
+		$scope.showAlert = function(msg) {
+		   var alertPopup = $ionicPopup.alert({
+			  title: msg,
+			  template: msg,
+		   });
+		   alertPopup.then(function(res) {
+			  console.log('Thanks');
+		   });
+
+		};
   }]);
