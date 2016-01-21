@@ -27,7 +27,7 @@
 			if (loginform.$valid) {
 				if (userDetails.email != null || userDetails.email != "" && userDetails.passWord != null || userDetails.passWord != "") {
 					//var login = "http://localhost:8080/sloan_test/login/loginValidation"
-					var login = "http://45.55.156.148:8080/Sloan_App_test/login/loginValidation"
+					var login = "http://45.55.156.148:8080/Sloan_app_ionic/login/loginValidation"
 					$log.log("Inside the doLogin() Details cheking",angular.toJson(userDetails));
 					
 					$http({

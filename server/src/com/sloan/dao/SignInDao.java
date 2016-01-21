@@ -31,7 +31,7 @@ public class SignInDao {
 		String passWord = user.getPassWord();
 		String e = "\"" + email + "\"";
 		String pass = "\"" + passWord + "\"";
-		String querystr = " Select * FROM User  WHERE email = " + e + " AND passWord=" + pass;
+		String querystr = " Select * FROM user  WHERE email = " + e + " AND passWord=" + pass;
 		System.out.println("----query String " + querystr);
 		Query result = entityManager.createNativeQuery(querystr, User.class);
 		List<User> userObj = result.getResultList();
@@ -39,14 +39,14 @@ public class SignInDao {
 	}
 
 	public List<Customer> getCustomer(Long id) throws Exception {
-		String querystr = "select * from Customer where user_id=" + id;
+		String querystr = "select * from customer where user_id=" + id;
 		Query result = entityManager.createNativeQuery(querystr, Customer.class);
 		List<Customer> userObj = result.getResultList();
 		return userObj;
 	}
 
 	public List<CareGiver> getCareGiver(Long id) throws Exception {
-		String querystr = "select * from CareGiver where user_id=" + id;
+		String querystr = "select * from caregiver where user_id=" + id;
 		Query care = entityManager.createNativeQuery(querystr, CareGiver.class);
 		List<CareGiver> userObj = care.getResultList();
 		return userObj;
