@@ -35,7 +35,7 @@ public class SignInDao {
 		System.out.println("----query String " + querystr);
 		Query result = entityManager.createNativeQuery(querystr, User.class);
 		List<User> userObj = result.getResultList();
-		return userObj;
+		return userObj;   
 	}
 
 	public List<Customer> getCustomer(Long id) throws Exception {
