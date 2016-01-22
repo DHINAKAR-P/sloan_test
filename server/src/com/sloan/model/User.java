@@ -1,11 +1,14 @@
 package com.sloan.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,6 +31,9 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserType userType;
 	private boolean isLoggedIn;
+	
+	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER)
+	private Organisation organisation;
 
 	public Long getId() {
 		return id;
@@ -68,6 +74,7 @@ public class User {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -84,7 +91,6 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-
 	public boolean isLoggedIn() {
 		return isLoggedIn;
 	}
@@ -92,7 +98,6 @@ public class User {
 	public void setLoggedIn(boolean isLoggedIn) {
 		this.isLoggedIn = isLoggedIn;
 	}
-
 
 	public String getEmail() {
 		return email;
@@ -107,6 +112,14 @@ public class User {
 		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", phoneNumber=" + phoneNumber + ", passWord=" + passWord + ", oldPassword=" + oldPassword
 				+ ", userType=" + userType + ", isLoggedIn=" + isLoggedIn + "]";
+	}
+
+	public Organisation getOrganisation() {
+		return organisation;
+	}
+
+	public void setOrganisation(Organisation organisation) {
+		this.organisation = organisation;
 	}
 
 }

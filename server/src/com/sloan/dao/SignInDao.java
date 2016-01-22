@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sloan.model.CareGiver;
 import com.sloan.model.Customer;
+import com.sloan.model.KeyValueData;
 import com.sloan.model.User;
 
 @Repository
@@ -35,7 +36,7 @@ public class SignInDao {
 		System.out.println("----query String " + querystr);
 		Query result = entityManager.createNativeQuery(querystr, User.class);
 		List<User> userObj = result.getResultList();
-		return userObj;   
+		return userObj;
 	}
 
 	public List<Customer> getCustomer(Long id) throws Exception {
@@ -50,6 +51,17 @@ public class SignInDao {
 		Query care = entityManager.createNativeQuery(querystr, CareGiver.class);
 		List<CareGiver> userObj = care.getResultList();
 		return userObj;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<KeyValueData> isEnviron(KeyValueData keyVal) {
+		String keydata = keyVal.getKey1();
+		String e = "\"" + keydata + "\"";
+		String querystr = "select * FROM key_db  WHERE key1 =" + e;
+		Query userObject = entityManager.createNativeQuery(querystr,
+				KeyValueData.class);
+		List<KeyValueData> keyObj = userObject.getResultList();
+		return keyObj;
 	}
 
 }

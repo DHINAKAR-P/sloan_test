@@ -21,7 +21,7 @@ public class CustomerController {
 	@RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
 	@ResponseBody
 	public Customer create(@RequestBody Customer careGiver) throws Exception {
-		System.out.println("care giver in controller" + careGiver.toString());
+		System.out.println("care giver in controller-----" + careGiver.toString());
 		return customerService.create(careGiver);
 	}
 

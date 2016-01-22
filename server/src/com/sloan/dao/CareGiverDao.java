@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sloan.controller.OrganisationController;
 import com.sloan.model.CareGiver;
+import com.sloan.model.Organisation;
 import com.sloan.model.User;
 
 
@@ -19,7 +22,9 @@ public class CareGiverDao {
 	
 	@PersistenceContext
 	EntityManager entityManager;
-	
+	@Autowired
+	OrganisationController orgController;
+	 
 	public CareGiver create(CareGiver care) throws Exception {
 		
 		CareGiver careGiver = new CareGiver();
@@ -37,8 +42,11 @@ public class CareGiverDao {
 		user.setOldPassword(care.getUser().getOldPassword());
 		user.setPassWord(care.getUser().getPassWord());
 		user.setPhoneNumber(care.getUser().getPhoneNumber());
-		user.setEmail(care.getUser().getEmail());		
-		user.setUserType(care.getUser().getUserType());		
+		user.setEmail(care.getUser().getEmail());
+		user.setUserType(care.getUser().getUserType());
+		
+		Organisation org= orgController.createOrganisation(care.getUser().getOrganisation());
+		user.setOrganisation(org);
 		careGiver.setUser(user);
 		
 		careGiver.setYearOfExperience(care.getYearOfExperience());

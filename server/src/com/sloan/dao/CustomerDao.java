@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sloan.controller.OrganisationController;
 import com.sloan.model.Customer;
+import com.sloan.model.Organisation;
 import com.sloan.model.User;
 
 
@@ -18,6 +21,10 @@ public class CustomerDao {
 
 	@PersistenceContext
 	EntityManager entityManager;
+	
+	@Autowired
+	OrganisationController orgController;
+
 	
 	public Customer create(Customer care) throws Exception {
 		
@@ -35,10 +42,13 @@ public class CustomerDao {
 		user.setPhoneNumber(care.getUser().getPhoneNumber());
 		user.setEmail(care.getUser().getEmail());		
 		user.setUserType(care.getUser().getUserType());		
+		
+		Organisation org= orgController.createOrganisation(care.getUser().getOrganisation());
+		user.setOrganisation(org);
+		
 		customer.setUser(user);
 		entityManager.persist(customer);
 		entityManager.flush();
-		
 		return customer;
 	}
 

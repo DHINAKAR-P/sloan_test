@@ -10,6 +10,7 @@ import com.sloan.dao.SignInDao;
 import com.sloan.dao.SignUpDao;
 import com.sloan.model.CareGiver;
 import com.sloan.model.Customer;
+import com.sloan.model.KeyValueData;
 import com.sloan.model.User;
 import com.sloan.service.SignInService;
 
@@ -46,6 +47,22 @@ public class SignInServiceImpl implements SignInService {
 			object = "failed";
 		}
 		return object;
+	}
+
+	@Override
+	public List<KeyValueData> isEnvironment(KeyValueData key) {
+		List<KeyValueData> values = signInDao.isEnviron(key);
+		List<KeyValueData> keyValue = null;
+		System.out.println("values.size()===="+values.size()); 
+		if (values.size() >=0) {
+			System.out.println("Already logged successfull");
+			KeyValueData useObji = values.get(0);
+			System.out.println("Cheking Values  " + useObji.getKey1());
+			System.out.println("Cheking Values  " + useObji.getValue1());
+			keyValue = values;
+			return keyValue;
+		}
+		return keyValue;
 	}
 
 }

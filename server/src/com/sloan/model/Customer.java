@@ -71,4 +71,10 @@ public class Customer {
 		this.details = details;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", user=" + user + ", name=" + name + ", gender=" + gender + ", details="
+				+ details + "]";
+	}
+
 }

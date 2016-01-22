@@ -26,6 +26,8 @@ public class Organisation {
 	@Column(name = "organisation_phonenumber")
 	private String organisationPhoneNumber;
 
+	private String base_organisation_id;
+	
 	public Long getId() {
 		return id;
 	}
@@ -56,6 +58,21 @@ public class Organisation {
 
 	public void setOrganisationPhoneNumber(String organisationPhoneNumber) {
 		this.organisationPhoneNumber = organisationPhoneNumber;
+	}
+
+	public String getBase_organisation_id() {
+		return base_organisation_id;
+	}
+
+	public void setBase_organisation_id(String base_organisation_id) {
+		this.base_organisation_id = base_organisation_id;
+	}
+
+	@Override
+	public String toString() {
+		return "Organisation [id=" + id + ", organisationName=" + organisationName + ", organisationLocation="
+				+ organisationLocation + ", organisationPhoneNumber=" + organisationPhoneNumber
+				+ ", base_organisation_id=" + base_organisation_id + "]";
 	}
 	
 	
