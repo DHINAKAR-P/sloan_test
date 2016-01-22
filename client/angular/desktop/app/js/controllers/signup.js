@@ -11,7 +11,12 @@
 
 		$log.log("Inside the SignUp Controller");
 
-		$scope.userSignUpDetails = {};
+		$scope.userSignUpDetails = {
+			
+				"organisation":{
+					"base_organisation_id":"2"
+				}
+		};
 
 		$scope.doSignUp = function(loginform,userSignUpDetails) {
 			$log.log("Inside the doSignUp");
