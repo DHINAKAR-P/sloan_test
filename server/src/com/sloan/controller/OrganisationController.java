@@ -37,6 +37,8 @@ public class OrganisationController {
 			baseOrg.setOrganisation_phonenumber(organisationList.get(i).getOrganisation_phonenumber());
 			returnList.add(baseOrg);
 			}*/
+		
+		System.out.println("list---org---"+organisationList.toString());
 		return organisationList;
 	}
 

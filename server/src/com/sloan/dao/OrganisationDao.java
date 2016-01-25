@@ -38,9 +38,9 @@ public class OrganisationDao {
 		org.setOrganisationLocation(organisation.getOrganisationLocation());
 		org.setOrganisationName(organisation.getOrganisationName());
 		org.setOrganisationPhoneNumber(organisation.getOrganisationPhoneNumber());
-		entityManager.persist(organisation);
+		entityManager.persist(org);
 		entityManager.flush();
-		return organisation;
+		return org;
 	}
 
 }
