@@ -1,11 +1,11 @@
 /**
- * 
+ *
  */
 
 
-app.service("userService", [ '$log', '$location', function($log, $location) {
+app.service("userService", ['$log', '$location', function ($log, $location) {
 
-	var self = this;
-	this.UserObject={};
+  var self = this;
+  this.UserObject = {};
 
-} ]);
+}]);

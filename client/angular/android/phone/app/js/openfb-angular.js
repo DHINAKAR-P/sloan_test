@@ -42,6 +42,7 @@ angular.module('openfb', [])
         console.log(logoutRedirectURL);
 
         document.addEventListener("deviceready", function () {
+		//alert("APP READY");
             runningInCordova = true;
         }, false);
 
@@ -53,7 +54,11 @@ angular.module('openfb', [])
          * @param store - The store used to save the Facebook token. Optional. If not provided, we use sessionStorage.
          */
         function init(appId, redirectURL, store) {
-            fbAppId = appId;
+            document.addEventListener("deviceready", function () {
+				runningInCordova = true;
+			}, false);
+		
+			fbAppId = appId;
             if (redirectURL) oauthRedirectURL = redirectURL;
             if (store) tokenStore = store;
         }
@@ -116,6 +121,7 @@ angular.module('openfb', [])
          * OAuth workflow.
          */
         function oauthCallback(url) {
+		console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"+url);
             // Parse the OAuth data received from Facebook
             var queryString,
                 obj;

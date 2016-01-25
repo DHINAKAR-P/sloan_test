@@ -1,3 +1,35 @@
-<div class="profile">
-    <h3 class="title">Hello, user</h3>
-</div>
+<ion-view view-title="Profile" class="profile">
+    <ion-content>
+        <div class="container">
+            <div class="content">
+                <div class="user">
+                    <div class="photo">
+                        <img src="img/profile.svg" alt="Profile Picture">
+                    </div>
+                    <div class="data">
+                        <h3 class="title">{{firstName + ' ' + lastName}}</h3>
+                    </div>
+                </div>
+                <!--<ul class="jobs list">-->
+                    <!--<li class="item">Job Title 1</li>-->
+                    <!--<li class="item">Job Title 1</li>-->
+                    <!--<li class="item">Job Title 1</li>-->
+                    <!--<li class="item">Job Title 1</li>-->
+                    <!--<li class="item">Job Title 1</li>-->
+                <!--</ul>-->
+                <div class="charts">
+                    <div id="chart"></div>
+                </div>
+                <div class="list">
+                    <div class="item item-divider">Jobs for you</div>
+                    <a class="item">Piano Tutor</a>
+                    <a class="item">Mathematics Tutor & Math Expert</a>
+                    <a class="item">Writer, Translator and Tutor</a>
+                </div>
+                <div class="sign-out text-center">
+                    <a href="#/home" class="button button-clear button-positive">Sign out</a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

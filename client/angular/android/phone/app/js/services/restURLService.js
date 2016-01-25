@@ -5,10 +5,9 @@
  *         </p>
  */
 
-app.service("RestURL", [ '$log', '$location', function($log, $location) {
-	$log.debug("App base URL: ", $location.absUrl().split("/#")[0]);
-
-	var self = this;
-	self.baseURL = $location.absUrl().split("/#")[0];
-
-} ]);
+app.factory("RestURL", function () {
+  return {
+    //baseURL: 'http://localhost:8080/Sloan/'
+    baseURL: 'http://45.55.156.148:8080/Sloan_app_ionic/'
+  }
+});

@@ -1,4 +1,4 @@
-/** 
+/**
  *
  * @author Schubert Generated Code</br>
  * Date Created: </br>
@@ -13,116 +13,334 @@
  *
  */
 
-app.controller('Authentication', ['$scope', '$rootScope', '$location', '$state', '$window', '$q', '$http', '$ionicPopup', 'RestURL', 'People_testId','OpenFB',
-  function ($scope, $rootScope, $location, $state, $window, $q, $http, $ionicPopup, RestURL, People_testId,OpenFB) {
-    var self = $scope;
+app.controller('Authentication', ['$scope', '$rootScope', '$location', '$state', '$window', '$q', '$http', '$ionicPopup', 'RestURL', 'People_testId', 'Settings', 'OpenFB',
+    function ($scope, $rootScope, $location, $state, $window, $q, $http, $ionicPopup, RestURL, People_testId, Settings, OpenFB) {
+        var self = $scope;
 
-    self.signIn = function () {
-      console.log('Sign In');
+        self.GPlusLogin = function () {
+            try {
+                if ($rootScope.env == 'DEV') {
+                    $scope.showAlert('Not allowed in Development Environment!');
+                } else {
+                    $window.plugins.googleplus.login(
+                        {},
+                        function (obj) {
+                            $scope.showAlert("SUCCESS LOGIN: " + obj.email);
+                            $state.go('home');
+                            //document.querySelector("#feedback").innerHTML = "Hi, " + obj.displayName + ", " + obj.email;
+                        },
+                        function (msg) {
+                            $scope.showAlert("ERROR: " + msg);
+                            $state.go('home');
+                        }
+                    );
+                }
+            } catch (d) {
+                console.log("ERRROR......." + d);
+            }
+        };
 
-      var user = {
-        "email": self.login.email,
-        "passWord": self.login.password
-      };
+        $scope.facebookLogin = function () {
+            if ($rootScope.env == 'DEV') {
+                $scope.showAlert('Not allowed in Development Environment!');
+            } else {
+                OpenFB.login('email').then(
+                    function () {
+                        OpenFB.get('/me').success(function (user) {
+                            $scope.showAlert("FB login succeeded" + user.id);
+                            $state.go('home');
+                        });
+                    },
+                    function (msg) {
+                        $scope.showAlert("OpenFB login failed" + msg);
+                        $state.go('home');
+                    });
+            }
+        };
 
-      $http.post(RestURL.baseURL + 'sloan_test/login/loginValidation/', user)
-        .success(function (data) {
-          // uncomment when fixed
-          //if (data.responseSuccess === 'success') {
-          //  if (!data.result.user.loggedIn) {
-              $state.go('organization');
-            //} else $state.go('profile');
-          //}
-        })
-        .error(function (error) {
-          console.warn('Sign In failed');
-          console.warn(error);
-        });
-    };
+        self.signIn = function () {
+            console.log('Sign In');
 
-    self.signUp = function () {
-      console.log('Sign Up');
+            var user = {
+                "email": self.login.email,
+                "passWord": self.login.password
+            };
 
-      var data = {
-        "email": self.email,
-        "firstName": "",
-        "lastName": "",
-        "phoneNumber": "",
-        "passWord": self.password,
-        "oldPassword": "",
-        "userType": "",
-        "loggedIn": false
-      };
-
-      $http.post(RestURL.baseURL + 'sloan_test/signup/create/', data)
-        .success(function (data) {
-          console.log('Account Created');
-
-          var user = {
-            "email": self.email,
-            "passWord": self.password
-          };
-
-          $http.post(RestURL.baseURL + 'sloan_test/login/loginValidation/', user)
-            .success(function (data) {
-              // uncomment when fixed
-              //if (data.responseSuccess === 'success') {
-              //  if (!data.result.user.loggedIn) {
-              $state.go('organization');
-              //} else $state.go('profile');
-              //}
-            })
-            .error(function (error) {
-              console.warn('Sign In failed');
-              console.warn(error);
-            });
-        })
-        .error(function (error) {
-          console.warn('Sign Up failed');
-          console.warn(error);
-        });
-    };
-
-    self.go = function (url) {
-      $state.go(url);
-    };
-
-	$scope.facebookLogin = function () {
-		 OpenFB.login('email').then(
-                function () {                    
-					OpenFB.get('/me').success(function (user) {
-						$scope.showAlert("FB login succeeded"+user.id);							
-					});					
-                },
-                function (msg) {
-                    $scope.showAlert("OpenFB login failed"+msg);
+            $http.post(RestURL.baseURL + 'login/loginValidation/', user)
+                .success(function (data) {
+                    console.log('hello friend');
+                    console.log(data);
+                    if (data.responseSuccess === 'success') {
+                        Settings.global = data.result[0];
+                        $state.go('profile');
+                    } else {
+                        $ionicPopup.alert({
+                            title: 'Login Failed',
+                            template: 'Invalid email or password'
+                        });
+                    }
+                })
+                .error(function (error) {
+                    console.warn('Sign In failed');
+                    console.warn(error);
                 });
         };
 
-		
-		$scope.gpluslogin = function () {
-  
-			$window.plugins.googleplus.login(
-				{},
-				function (obj) {
-				  $scope.showAlert("SUCCESS LOGIN: "+obj.email);
-				  //document.querySelector("#feedback").innerHTML = "Hi, " + obj.displayName + ", " + obj.email;
-				},
-				function (msg) {				
-				  $scope.showAlert("ERROR: "+msg);
-				}
-			);
-	}
-	
-	
-		$scope.showAlert = function(msg) {
-		   var alertPopup = $ionicPopup.alert({
-			  title: msg,
-			  template: msg,
-		   });
-		   alertPopup.then(function(res) {
-			  console.log('Thanks');
-		   });
+        //$http.get(RestURL.baseURL + 'organization/getAllOrg/')
+        //    .success(function (response) {
+        //        self.organizations = response;
+        //        console.log('GET organization:', response);
+        //    })
+        //    .error(function (error) {
+        //        console.warn(error);
+        //    });
 
-		};
-  }]);
+        // Put this process inside a function
+        self.organizations = [
+            {
+                organisation_name: 'Kappa Alpha Theta',
+                id: 1,
+                organisation_location: null,
+                organisation_phonenumber: null
+            },
+            {
+                id: 2,
+                organisation_name: 'Alpha Omicron Pi',
+                organisation_location: null,
+                organisation_phonenumber: null
+            },
+            {
+                id: 3,
+                organisation_name: 'Delta Tau Delta',
+                organisation_location: null,
+                organisation_phonenumber: null
+            },
+            {
+                id: 4,
+                organisation_name: 'Kappa Sigma',
+                organisation_location: null,
+                organisation_phonenumber: null
+            }
+        ];
+
+        self.emailAndPassword = function () {
+            Settings.global = {};
+            if (self.email && self.password) {
+                Settings.global = {
+                    "email": self.email,
+                    "first_name": "user",
+                    "last_name": "profile",
+                    "phone_number": 0,
+                    "password": self.password,
+                    "old_password": "",
+                    "user_type": "CUSTOMER",
+                    "organization": {
+                        "base_organisation_id": "3"
+                    },
+                    "logged_in": false
+                };
+
+                $state.go('organization');
+            }
+        };
+
+        self.getOrganization = function () {
+            if (self.organization) {
+                Settings.global.organization = self.organization;
+                $state.go('purpose');
+            }
+        };
+
+        self.getPurpose = function (userType) {
+            Settings.global.user_type = userType;
+            switch (Settings.global.user_type) {
+                case 'CUSTOMER': {
+                    $state.go('customer');
+                    break;
+                }
+                case 'CAREGIVER': {
+                    $state.go('caregiver');
+                    break;
+                }
+            }
+        };
+
+        self.getGender = function () {
+            if (self.gender) {
+                Settings.global.gender = self.gender;
+            }
+        };
+
+        self.customerSearch = function () {
+            $state.go('info');
+        };
+
+        self.caregiverSearch = function () {
+            $state.go('info');
+        };
+
+        self.getInfo = function () {
+            var valid = self.firstName && self.lastName && self.tel && self.birthday && self.gender;
+            if (valid) {
+                Settings.global.first_name = self.firstName;
+                Settings.global.last_name = self.lastName;
+                Settings.global.phone_number = self.tel;
+                Settings.global.date_of_birth = self.birthday;
+                Settings.global.gender = self.gender;
+
+                //var legal = confirm('Are you legally eligible to work in the United States?');
+                //if (legal) {
+                //    self.signUp();
+                //} else {
+                //    alert('Oops :(');
+                //}
+
+                self.signUp();
+            } else {
+                alert('Invalid Information');
+            }
+        };
+
+        self.signUp = function () {
+            var user;
+            Settings.global.logged_in = true;
+
+            switch (Settings.global.user_type) {
+                case 'CUSTOMER': {
+                    user = {
+                        "details": "",
+                        "gender": Settings.global.gender,
+                        "name": "",
+                        "user": {
+                            "organisation": {
+                                "base_organisation_id": "2"
+                            },
+                            "firstName": Settings.global.first_name,
+                            "lastName": Settings.global.last_name,
+                            "email": Settings.global.email,
+                            "userType": "CUSTOMER",
+                            "phoneNumber": Settings.global.phone_number,
+                            "passWord": Settings.global.password
+                        }
+                    };
+
+                    console.log('CUSTOMER: ', user);
+
+                    $http.post(RestURL.baseURL + 'customer/create/', user)
+                        .success(function (data) {
+                            console.log('CUSTOMER Created');
+                            console.log(data);
+
+                            var user = {
+                                "email": data.user.email,
+                                "passWord": data.user.passWord
+                            };
+
+                            $http.post(RestURL.baseURL + 'login/loginValidation/', user)
+                                .success(function (data) {
+                                    console.log(data);
+                                    if (data.responseSuccess === 'success') {
+                                        Settings.global = data.result[0];
+                                        $state.go('profile');
+                                    } else {
+                                        $ionicPopup.alert({
+                                            title: 'Login Failed',
+                                            template: 'Invalid email or password'
+                                        });
+                                    }
+                                })
+                                .error(function (error) {
+                                    console.warn('Sign In failed');
+                                    console.warn(error);
+                                });
+                        })
+                        .error(function (error) {
+                            console.log('Sign Up failed');
+                            console.warn(error);
+                        });
+
+                    break;
+                }
+                case 'CAREGIVER': {
+                    user = {
+                        "firstName": Settings.global.first_name,
+                        "lastname": Settings.global.last_name,
+                        "dateOfBirth": Settings.global.date_of_birth,
+                        "email": Settings.global.email,
+                        "password": Settings.global.password,
+                        "user": {
+                            "organisation": {
+                                "base_organisation_id": "2"
+                            },
+                            "email": Settings.global.email,
+                            "firstName": Settings.global.first_name,
+                            "lastName": Settings.global.last_name,
+                            "phoneNumber": Settings.global.phone_number,
+                            "passWord": Settings.global.password,
+                            "oldPassword": null,
+                            "userType": "CAREGIVER",
+                            "loggedIn": true
+                        },
+                        "yearOfExperience": 0,
+                        "languageKnown": "",
+                        "description": "",
+                        "education": "",
+                        "workPermit": false
+                    };
+
+                    console.log('CAREGIVER', user);
+
+                    $http.post(RestURL.baseURL + 'careGiver/create/', user)
+                        .success(function (data) {
+                            console.log('CAREGIVER Created');
+                            console.log(data);
+
+                            var user = {
+                                "email": data.user.email,
+                                "passWord": data.user.passWord
+                            };
+
+                            $http.post(RestURL.baseURL + 'login/loginValidation/', user)
+                                .success(function (data) {
+                                    console.log(data);
+                                    if (data.responseSuccess === 'success') {
+                                        Settings.global = data.result[0];
+                                        $state.go('profile');
+                                    } else {
+                                        $ionicPopup.alert({
+                                            title: 'Login Failed',
+                                            template: 'Invalid email or password'
+                                        });
+                                    }
+                                })
+                                .error(function (error) {
+                                    console.warn('Sign In failed');
+                                    console.warn(error);
+                                });
+                        })
+                        .error(function (error) {
+                            console.log('Sign Up failed');
+                            console.warn(error);
+                        });
+
+                    break;
+                }
+            }
+
+
+        };
+
+        self.go = function (url) {
+            $state.go(url);
+        };
+
+        self.showAlert = function (msg) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Result: ',
+                template: msg
+            });
+            alertPopup.then(function (res) {
+                console.log('Thanks');
+            });
+        };
+    }]);

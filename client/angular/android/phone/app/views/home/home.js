@@ -4,7 +4,7 @@
  *
  */
 
-angular.module('social')
+angular.module('Social')
   .controller('HomeController', ['$log', '$scope', '$http', '$location', '$ionicPopup', '$timeout', '$ionicLoading', '$q', '$state', '$window', 'RestURL',
     function ($log, $scope, $http, $location, $ionicPopup, $timeout, $ionicLoading, $q, $state, $window, RestURL) {
 
@@ -19,7 +19,7 @@ angular.module('social')
        * Facebook Login implementation
        */
 
-// This is the success callback from the login method
+      // This is the success callback from the login method
       var fbLoginSuccess = function (response) {
         if (!response.authResponse) {
           fbLoginError("Cannot find the authResponse");
