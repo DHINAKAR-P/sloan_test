@@ -1,0 +1,299 @@
+<header class="user" data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="project">
+	<h1 class="title">Manage Project</h1>
+	 <tabset class="tabs">
+		<tab heading="General Information">
+			<div class="general">
+				<form class="properties" name="myForm">
+					<div class="item">
+						<label for="name">Name</label>
+						<input type="text" name="name" class="form-control" id="name" placeholder="Enter name" data-ng-model="project.projectName" data-ng-required="true" validator name-before-edit="{{json.name}}" name-type="project" project-id="{{json.id}}"   
+						data-ng-maxlength="50">
+		            	<ul class="error-msgs" ng-messages="myForm.name.$error" style="color: red;font-style: italic;">
+							<li ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+							<li ng-message="specialCharacterValidator">Special characters except underscore & hyphen, are not allowed!</li>
+							<li ng-message="uniqueNameValidator">Name already taken!</li>
+							<li ng-message="startAlphabetValidator">Name should start with an alphabet!</li>
+							<li ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!</li>
+							<li data-ng-show="myForm.name.$dirty && myForm.name.$error.maxlength">Name can have maximum 50
+							characters!</li>
+							<li data-ng-show="myForm.name.$dirty && myForm.name.$error.required">Name is required!</li>
+						</ul>				
+					</div>
+					<div class="item">
+						<label for="label">Label</label>
+						<input type="text" class="form-control" id="label" placeholder="Enter label" data-ng-model="project.projectLabel">
+					</div>
+					<div class="item">
+						<label for="company">Entity / Company</label>
+						<input type="text" class="form-control" id="company" name="entity" placeholder="Enter entity or company" data-ng-model="project.projectCompany" validator name-type="entity">
+					<ul class="error-msgs" ng-messages="myForm.entity.$error" style="color: red;font-style: italic;">
+						<li ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+						<li ng-message="no_specialCharacterValidator">No Special characters are not allowed!</li>
+					</ul>
+					</div>
+					<div class="item">
+						<label for="primary">Primary Language</label>
+						  <select data-ng-model="project.mainLanguage" class="form-control"
+							data-ng-options="opt.name for opt in mainLanguages track by opt.id" data-ng-change="additionalLanguageDropdown(project.mainLanguage.name)">
+							<option value="0" selected = "selected">Primary Language</option>
+					</select>
+
+					</div>
+					<div class="item">
+						<label for="secondary">Secondary Languages</label>
+							<div ng-dropdown-multiselect="" options="additionalLanguages" selected-model="selectedadditionallanguage" extra-settings="multiselectsettings"></div>
+					</div>
+					<div class="item">
+						<label for="description">Description</label>
+						<input type="text" class="form-control" id="description" placeholder="Enter description" data-ng-model="project.projectDescription">
+					</div>
+				<!-- 	<div class="item">
+						<label>Type</label>
+						<div class="type">
+							<label class="form-checkbox">
+								<input type="checkbox" checked>
+								<span>Desktop / Laptop</span>
+							</label>
+							<label class="form-checkbox">
+								<input type="checkbox" checked>
+								<span>Mobile</span>
+							</label>
+						</div>
+					</div> -->
+				</form>
+				<hr>
+				<div class="action">
+					<button class="btn complete" ng-click="openGenerateModal()">Generate</button>
+					<button class="btn btn-info" ng-click="tabactivityactive = true">Create Activity</button>
+					<button class="btn btn-info" ng-click="tabnounactive = true">Create Noun</button>
+					<button class="btn btn-info" ng-click="tabnounactive = true">Create Menu</button>
+				</div>
+				<hr>
+				<accordion>
+					<accordion-group heading="Technical Architecture" is-open="true" class="architecture">
+						<form>
+							<div class="client">
+								<h3 class="title">Client Properties</h3>
+								<div class="item">
+									<label for="client-dev-lang">Client Development Languages</label>
+									<!-- <select class="form-control" id="client-dev-lang"></select> -->
+									<div ng-dropdown-multiselect="" options="clientdevlanguage" selected-model="selectedclientdevlanguage" extra-settings="multiselectsettings"></div>
+								</div>
+								<div class="item">
+									<label for="client-dev-frame">Client Development Frameworks</label>
+									<div ng-dropdown-multiselect="" options="clientdevframework" selected-model="selectedclientdevframework" extra-settings="multiselectsettings"></div>
+								</div>
+								<div class="item">
+									<label for="client-os">Client OS</label>
+									<div ng-dropdown-multiselect="" options="clientOS" selected-model="selectedClientOS" extra-settings="multiselectsettings"></div>
+									
+								</div>
+								<div class="item">
+									<label for="device-types">Device Types</label>
+									<div ng-dropdown-multiselect="" options="clientDeviceTypes" selected-model="selectedclientdevicetypes" extra-settings="multiselectsettings"></div>
+								</div>
+								<div class="item">
+									<label for="supported-browsers">Supported Browsers</label>
+									<div ng-dropdown-multiselect="" options="browsers" selected-model="selectedbrowsers" extra-settings="multiselectsettings"></div>
+								</div>
+								<div class="item">
+									<label>Mobile Only</label>
+									<div class="mobile-only">
+    								    <label>Stand Alone</label>
+											<label class="form-radio">
+												<input  type="radio" 
+												ng-value="true" data-ng-model="project.stand_alone_app">
+												<span>Yes</span>
+											</label> 
+											<label class="form-radio">
+												<input  type="radio" 
+												ng-value="false" data-ng-model="project.stand_alone_app">
+												<span>No</span>
+											</label>
+ 									</div>
+								</div>
+							</div>
+							<div class="server">
+								<h3 class="title">Server Properties</h3>
+								<div class="item">
+									<label for="server-run-env">Server Runtime Environment</label>
+										<select data-ng-model="project.serverRunTime" class="form-control" data-ng-options="opt.name for opt in serverRunTimes track by opt.id"></select>
+								</div>
+								<div class="item">
+									<label for="server-os">Server OS</label>
+									<select data-ng-model="project.serverOs" class="form-control" data-ng-options="opt.name for opt in serverOS track by opt.id"></select>
+								</div>
+								<div class="item">
+									<label for="server-dev-lang">Server Development Language</label>
+									<select class="form-control" data-ng-model="project.serverDevelopmentLanguage" data-ng-options="opt.name for opt in serverLanguages track by opt.id"></select>
+								</div>
+								<div class="item">
+									<label for="database">Database</label>
+									<select class="form-control" data-ng-model="project.serverDbms" data-ng-options="opt.name for opt in serverDBMS track by opt.id"></select>
+								</div>
+								<div class="item">
+									<label for="server-dev-frame">Server Development Framework</label>
+										<select class="form-control" data-ng-model="project.serverDevelopmentFramework" data-ng-options="opt.name for opt in serverDevFramework track by opt.id"></select>
+								</div>
+							</div>
+							<div class="miscellaneous">
+								<h3 class="title">Miscellaneous</h3>
+								<div class="item">
+									<label>Communication Protocol</label>
+									<div class="protocol">
+ 										<label class="form-radio">
+												<input id="sec" type="radio" name="Protocal"
+											ng-value="true" data-ng-model = "project.communication_protocal">
+											<span>Secured</span>
+										</label>
+										<label class="form-radio">
+											<input id="non-sec" type="radio" name="Protocal"
+											ng-value="false" data-ng-model = "project.communication_protocal">
+											<span>Non-Secured</span>
+										</label>
+ 									</div>
+								</div>
+								<div class="item">
+									<label for="default-mod-labels">Default Module Labels</label>
+									<input type="text" class="form-control" id="default-mod-labels"
+										   placeholder="Enter default module labels" data-ng-model="project.default_module_label">
+								</div>
+							</div>
+						</form>
+					</accordion-group>
+					<accordion-group heading="Documentation" class="docs">
+						<textarea data-ck-editor data-ng-model="project.projectNotes"></textarea>
+					</accordion-group>
+				</accordion>
+				<div class="action">
+					<button class="btn complete" data-ng-disabled="myForm.name.$invalid || myForm.name.$pending || myForm.entity.$invalid" data-ng-click="submitProject()" ng-show="showcreate">Save</button>
+     				<button class="btn complete" data-ng-disabled="myForm.name.$invalid || myForm.name.$pending || myForm.entity.$invalid" data-ng-click="updateProject()" ng-show="!showcreate">Save</button>
+     				<button class="btn danger" data-ng-click="openDeleteDialog('sm',json.id)">Delete</button>
+				</div>
+			</div>
+		</tab>
+		<tab heading="Activity Design" active="tabactivityactive">
+			<accordion>
+				<accordion-group heading="User Activities" is-open="true" class="user-activities">
+					<div class="activities">
+						<button class="btn complete add" ng-click="openModal('create','activity','sm');">
+							<i class="fa fa-plus-circle"></i>
+							<span>Add</span>
+						</button>
+						<ul>
+							<li data-ng-repeat="object in activities">
+								<h3 class="title lead">{{object.name}}</h3>
+								<h4 class="label">{{object.label}}</h4>
+								<p class="description">
+									{{object.description}}
+								</p>
+								<div class="action">
+									<button class="btn success edit" ng-show="object.module_type=='default'" ng-click="updateActivity(object.id,object.name)">
+										<i class="fa fa-pencil-square-o"></i>
+										<span>Edit</span>
+									</button>
+									<button class="btn danger delete" ng-click="setDeleteActivityObj(object); openModal('delete','activity','sm');">
+										<i class="fa fa-trash-o"></i>
+										<span>Delete</span>
+									</button>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</accordion-group>
+				<accordion-group heading="Other Activities" class="other-activities">
+					<!-- <p>TBD</p> -->
+					<div class="activities">
+						<ul>
+							<li data-ng-repeat="object in predefined_activities">
+								<h3 class="title lead">{{object.name}}</h3>
+								<h4 class="label">{{object.label}}</h4>
+								<p class="description">
+									{{object.description}}
+								</p>
+								<div class="action">
+									<button class="btn complete add" ng-disabled="!object.activity_visibility" ng-click="addModule(object,json.id)">
+										<i class="fa fa-plus-circle"></i>
+										<span>Add to my project</span>
+									</button>									
+								</div>
+							</li>
+						</ul>
+					</div>
+				</accordion-group>
+			</accordion>
+		</tab>
+		<tab heading="Noun Design" active="tabnounactive">
+			<accordion>
+				<accordion-group heading="User Nouns" is-open="true" class="user-nouns">
+					<div class="nouns">
+						<button class="btn complete add" ng-click="openModal('create','noun','sm');">
+							<i class="fa fa-plus-circle"></i>
+							<span>Add</span>
+						</button>
+						<ul>
+							<li data-ng-repeat="object in nouns" > 
+								<h3 class="title lead">{{object.name}}</h3>
+								<h4 class="label">{{object.label}}</h4>
+								<p class="description">
+									{{object.description}}
+								</p>
+								<div class="action">
+									<button class="btn success edit" ng-click="updateNoun(object)">
+										<i class="fa fa-pencil-square-o"></i>
+										<span>Edit</span>
+									</button>
+									<button class="btn danger delete" ng-click="setDeleteNounObj(object);openModal('delete','noun','sm');">
+										<i class="fa fa-trash-o"></i>
+										<span>Delete</span>
+									</button>
+								</div>
+							</li>
+							
+						</ul>
+					</div>
+				</accordion-group>
+				<accordion-group heading="Other Nouns" class="other-nouns">
+					<p>TBD</p>
+				</accordion-group>
+			</accordion>
+		</tab>
+		<tab heading="Menu Builder" active="tabmenuactive">
+			<div data-ng-include="'app/views/en-US/user/menu.html'"></div>
+		</tab>
+		<tab heading="Site Template" active="tabsitetemplate">
+			<!-- <div data-ng-include="'app/views/en-US/user/project-template-view.html'"></div> -->
+			<accordion>
+				<accordion-group heading="User Templates" is-open="true" class="user-templates">
+					<div class="templates">
+						<button class="btn complete add" ng-click="openModal('create','template','sm');">
+							<i class="fa fa-plus-circle"></i>
+							<span>Add</span>
+						</button>
+						<ul>
+							<li data-ng-repeat="object in projectTemplates">
+								<h3 class="title lead">{{object.name}}</h3>
+								<h4 class="label">{{object.label}}</h4>
+								<p class="description">
+									{{object.description}}
+								</p>
+								<div class="action">
+									<button class="btn success edit" ng-click="updateProjectTemplate(object.projectTemplateId)">
+										<i class="fa fa-pencil-square-o"></i>
+										<span>Edit</span>
+									</button>
+									<button class="btn danger delete" ng-click="setDeleteProjectTemplate(object); openModal('delete', 'template', 'sm');">
+										<i class="fa fa-trash-o"></i>
+										<span>Delete</span>
+									</button>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</accordion-group>
+			</accordion>
+		</tab>
+	</tabset>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>

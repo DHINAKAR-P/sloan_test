@@ -32,6 +32,12 @@ public class OrganisationDao {
 	}
 
 	public Organisation createOrganisation(Organisation organisation) {
+		Organisation org=new Organisation();
+		String id=organisation.getId().toString();//Base organisation object oly come here from jSon
+		org.setBase_organisation_id(id);
+		org.setOrganisationLocation(organisation.getOrganisationLocation());
+		org.setOrganisationName(organisation.getOrganisationName());
+		org.setOrganisationPhoneNumber(organisation.getOrganisationPhoneNumber());
 		entityManager.persist(organisation);
 		entityManager.flush();
 		return organisation;

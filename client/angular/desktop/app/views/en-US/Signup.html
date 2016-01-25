@@ -1,0 +1,53 @@
+<!-- modifie by Rashmi, wired the html with angular code -->
+<div class="login">
+	<div class="form">
+		<h1 class="title lead">Sign Up</h1>
+		<form class="form-horizontal"
+			data-ng-submit="doSignUp(loginform,userSignUpDetails)" novalidate
+			name="loginform">
+			<span style="color: red; font-style: italic;">{{errormessage}}</span>
+			
+			<label for="email">Username:</label> <input 
+				class="form-control" id="username" placeholder="Enter email"
+				data-ng-model="userSignUpDetails.email" type="email" name="email"
+				id="mail" data-ng-required="true"
+				data-ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+
+			<!-- <label for="firstName">firstName</label> <input type="text"
+				class="form-control" id="lastName" placeholder="Enter firstName"
+				data-ng-model="userSignUpDetails.firstName" 
+				name="firstName" data-ng-required="true">
+				 <label
+				for="lastName">Lastname</label> <input type="text"
+				class="form-control" id="lastName" placeholder="Enter lastName"
+				data-ng-model="userSignUpDetails.lastName"
+				name="lastName" data-ng-required="true">
+				
+				 <label
+				for="phoneNumber">phoneNumber</label>
+				 <input type="number"
+				class="form-control" id="phoneNumber"
+				placeholder="Enter phoneNumber"
+				data-ng-model="userSignUpDetails.phoneNumber" 
+				name="phoneNumber" data-ng-required="true">
+			<div class="item">
+				<label for="usertype">Type Of User </label> <select
+					style="width: 100%;" id="campaigntype"
+					data-ng-model="userSignUpDetails.userType" class="form-control"
+					required="required">
+					<option value="" selected="selected">Select the Type</option>
+					<option value="CUSTOMER">CUSTOMER</option>
+					<option value="CAREGIVER">CAREGIVER</option>
+				</select>
+			</div> -->
+
+			<label for="password">Password:</label> <input type="password"
+				class="form-control" id="password" placeholder="Enter password"
+				data-ng-model="userSignUpDetails.passWord"
+				name="password" id="psw" data-ng-required="true" min="4" max="16"
+				data-ng-minlength="4" data-ng-maxlength="16"> <br />
+			<button type="submit" class="btn btn-default submit"
+				data-ng-submit="doSignUp()">Next</button>
+		</form>
+	</div>
+</div>

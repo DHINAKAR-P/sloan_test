@@ -1,0 +1,20 @@
+<div class="login">
+<div data-ng-controller="OrganisationController as customerListVar ">
+	<div class="form">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th><span>I am A..</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="care in customerListVar">
+						<td><a  data-ng-click="CareGiverIamA(care)" >{{care}}</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+</div>

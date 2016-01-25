@@ -1,0 +1,67 @@
+<div class="login">
+	<div class="form">
+		<h1 class="title lead">CareGiver</h1>
+		<form class="form-horizontal"
+			data-ng-submit="SaveCareGiver(careGiverForm,CustomerDetails)" novalidate
+			name="careGiverForm">
+
+			<label for="firstName">FirstName</label> <input type="text"
+				class="form-control" id="Details" placeholder="Enter firstName"
+				data-ng-model="CareGiverDetails.firstName" 
+				name="firstName" data-ng-required="true"> 
+				<label
+				for="name">LastName</label> <input type="text"
+				class="form-control" id="lastname" placeholder="Enter lastname"
+				data-ng-model="CareGiverDetails.lastname" 
+				name="lastname" data-ng-required="true"> 
+				
+			<!-- 	<label
+				for="name">Email</label> <input type="email"
+				class="form-control" id="lastname" placeholder="Enter Email"
+				data-ng-model="CareGiverDetails.email" 
+				name="Email" data-ng-required="true">  -->
+				
+				<label
+				for="name">DateOfBirth</label> <input type="date"
+				class="form-control" id="dateOfBirth" placeholder="Enter dateOfBirth"
+				data-ng-model="CareGiverDetails.dateOfBirth" 
+				name="dateOfBirth" data-ng-required="true"> 
+				
+			<!-- 	<label
+				for="name">Password</label> <input type="password"
+				class="form-control" id="Password" placeholder="Enter Password"
+				data-ng-model="CareGiverDetails.password" 
+				name="Password" data-ng-required="true">  -->
+			 
+			 <label
+				for="name">YearOfExperience</label> <input type="number"
+				class="form-control" id="yearOfExperience" placeholder="Enter YearOfExperience"
+				data-ng-model="CareGiverDetails.yearOfExperience" 
+				name="yearOfExperience" data-ng-required="true"> 
+			 
+			 	 <label
+				for="name">LanguageKnown</label> <input type="text"
+				class="form-control" id="languageKnown" placeholder="Enter LanguageKnown"
+				data-ng-model="CareGiverDetails.languageKnown" 
+				name=languageKnown data-ng-required="true"> 
+				
+			 	 <label
+				for="name">Description</label> <input type="text"
+				class="form-control" id="description" placeholder="Enter Description"
+				data-ng-model="CareGiverDetails.description"
+				name=description data-ng-required="true"> 
+				
+				
+					 <label
+				for="name">education</label> <input type="text"
+				class="form-control" id="education" placeholder="Enter Education"
+				data-ng-model="CareGiverDetails.education" 
+				name=education data-ng-required="true"> 
+				
+				<br/>
+			 
+			<button type="submit" class="btn btn-default submit"
+				data-ng-submit="SaveCareGiver()">Register</button>
+		</form>
+	</div>
+</div>

@@ -13,8 +13,8 @@
  *
 */
 
-app.controller("Landing_page", [ '$scope', '$rootScope', '$location', '$window', '$q', '$http',
-				    function( $scope, $rootScope, $location, $window, $q, $http) {
+app.controller("Landing_page", [ '$scope', '$rootScope', '$location', '$window', '$q', '$http','userService',
+				    function( $scope, $rootScope, $location, $window, $q, $http,userService) {
 
 		$scope.People_test = {
 		_Id: '',
@@ -22,10 +22,15 @@ app.controller("Landing_page", [ '$scope', '$rootScope', '$location', '$window',
 		_Last_name : '', 
 		_Organization_id : ''
 		};
+		
+		
+		
 
-
-
-
+		$scope.Landing = {
+				name : userService.UserObject.email
+		};
+		console.log(" -------landing details -",$scope.Landing.name);
+		
 		$scope.$on('$viewContentLoaded', function(event) {
 			var biggestHeight = 0;
 			var height = 0;

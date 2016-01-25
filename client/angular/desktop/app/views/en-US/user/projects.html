@@ -1,0 +1,27 @@
+<header class="user" data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="projects">
+	<button class="btn complete add" data-ng-click="openAddProjectModal()">
+        <i class="fa fa-plus-circle"></i>
+        <span>Add</span>
+    </button>
+	 <ul>
+            <li data-ng-repeat="object in json" id="{{object.id}}" >
+            <h3 class="title lead">{{object.name}}</h3>
+            <h4 class="label">{{object.label}}</h4>
+            <p class="description">
+               {{object.description}}
+            </p>
+            <div class="action">
+                <button class="btn success edit" data-ng-click="selectProject(object.id)">
+                    <i class="fa fa-pencil-square-o"></i>
+                    <span>Edit</span>
+                </button>
+                <button class="btn danger delete" data-ng-click="openDeleteDialog('sm',object.id)">
+                    <i class="fa fa-trash-o"></i>
+                    <span>Delete</span>
+                </button>
+            </div>
+		</li>
+	</ul>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>

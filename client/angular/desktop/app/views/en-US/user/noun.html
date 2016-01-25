@@ -1,0 +1,164 @@
+<header class="user"
+	data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="noun" ng-controller="NounCtrl as nounCtrl">
+	<h1 class="title">Noun Designer</h1>
+	<button class="btn complete go-back" ng-click="gotoProject()">Go
+		Back</button>
+	<tabset class="tabs"> <tab heading="Manage Noun"> <accordion>
+	<accordion-group heading="Required Information" is-open="true"
+		class="required-info">
+	<form class="required" name="$root.myForm">
+		<div class="item">
+			<label for="name">Name</label> <input type="text"
+    class="form-control" id="name" name="name" placeholder="Enter name"
+    ng-model="nounvalues.name" validator name-before-edit="{{nounInfo.name}}" name-type="noun" project-id="{{nounInfo.proj_id}}" data-ng-required="true"   
+      data-ng-maxlength="50">
+    <ul class="error-msgs" ng-messages="$root.myForm.name.$error" style="color: red;font-style: italic;">
+        <li ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+           <li ng-message="specialCharacterValidator">Special character except underscore,hyphen are not allowed!</li>
+           <li ng-message="uniqueNameValidator">Name already taken!</li>
+           <li ng-message="startAlphabetValidator">Name should start with an alphabet!</li>
+           <li ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!</li>
+           <li data-ng-show="$root.myForm.name.$dirty && $root.myForm.name.$error.maxlength">Name should have maximum of 50
+           characters!</li>
+           <li data-ng-show="$root.myForm.name.$dirty && $root.myForm.name.$error.required">Name is required!</li>
+    </ul>
+		</div>
+		<div class="item">
+			<label for="description">Description</label> <input type="text"
+				class="form-control" id="description"
+				placeholder="Enter description" ng-model="nounvalues.description">
+		</div>
+		<div class="item">
+			<label for="properties">Copy properties from</label> <select
+				class="form-control" name="copy" title="Copp noun properties from"
+				autofocus="autofocus" required="required" ng-model="nounData"
+				ng-options="type as type.label for type in allNounProject">
+				<option value="">---Select---</option>
+			</select>
+		</div>
+	</form>
+	<form class="properties" name="$root.myForm1">
+	<div class="properties">
+	
+		<h3 class="title lead">Properties</h3>
+		<ul class="error-msgs" ng-messages="$root.myForm1.$error" style="color: red;font-style: italic;">
+					   <li ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+				       <li ng-message="specialCharacterValidator">Special character except underscore,hyphen are not allowed!</li>
+				       <li ng-message="uniqueNameValidator">Name already taken!</li>
+				       <li ng-message="startAlphabetValidator">Name should start with an alphabet!</li>
+				       <li ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!</li>
+				       <li data-ng-show="$root.myForm1.$dirty && $root.myForm1.$error.maxlength">Name should have maximum of 50
+				       characters!</li>
+				       <li data-ng-show="$root.myForm1.$dirty && $root.myForm1.$error.required">Name is required!</li>
+				</ul>
+		
+				
+		<div ui-grid="gridOptions" ui-grid-edit class="table"></div>
+	
+		<button ng-click="addNewRow()" class="btn btn-success">Add New Row</button>
+		<br>
+		
+		<!-- old version table -->
+		<!-- 
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Label</th>
+					<th>Type</th>
+					<th>Modifier</th>
+					<th>Description</th>
+					<th>Unique</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					ng-repeat="nounAttributes in nounvalues.nounattributes track by $index">
+					<th scope="row"><editable-data
+							input-data="nounAttributes.name"></editable-data></th>
+					<td><editable-data input-data="nounAttributes.label"></editable-data></td>
+					<td><select class="full-width hover" name="copy"
+						ng-model="nounAttributes.subtype" data-init-plugin="select2"
+						title="Copp noun properties from" autofocus="autofocus"
+						style="border: 1px solid rgba(0, 0, 0, .07); padding: 9px 12px;"
+						ng-options="nounType.label as nounType.label for nounType in nounType"
+						ng-change="setModifier(nounAttributes)">
+							<option value="">---Select---</option>
+					</select></td>
+					<td>{{nounAttributes.subtypemodifiervalue}}</td>
+					<td><editable-data input-data="nounAttributes.description"></editable-data></td>
+					<td>
+						<p class="tech-checkbox">
+							<input id="check{{$index}}" type="checkbox" name="check"
+								ng-checked="nounAttributes.ispart_of_unique_key"
+								ng-model="nounAttributes.ispart_of_unique_key">&nbsp; <label
+								for="check{{$index}}"></label>
+						</p>
+					</td>
+				</tr>
+				<tr ng-click="addNewRow()">
+					<th scope="row">Click to add</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table> -->
+	</div>
+	</form>
+	<hr>
+	<div>
+		<h3 class="title lead">Relationships</h3>
+		<form class="relationships">
+			<label for="none" class="form-radio"> <input type="radio"
+				ng-checked="isNone" name="relationships" id="none" value="none">
+				<span>None</span>
+			</label> <label for="parent" class="form-radio"> <input type="radio"
+				ng-checked="parentOf" name="relationships" id="parent"
+				value="parent"> <span>Parent Of</span>
+			</label> <select class="form-control hover" name="copy"
+				ng-disabled="!parentOf" data-init-plugin="select2"
+				title="Parent Noun" autofocus="autofocus" ng-model="noun.parents"
+				ng-options="parent as parent.label for parent in allNounProject">
+				<option value="">---Select---</option>
+			</select> <label for="child" class="form-radio"> <input type="radio"
+				ng-checked="childOf" name="relationships" id="child" value="child">
+				<span>Child Of</span>
+			</label> <select class="form-control hover" name="copy"
+				ng-disabled="!childOf" data-init-plugin="select2" title="Child Noun"
+				autofocus="autofocus" ng-model="noun.children"
+				ng-options="child as child.label for child in allNounProject">
+				<option value="">---Select---</option>
+			</select>
+		</form>
+	</div>
+	<hr>
+	<div class="cache">
+		<label for="cache" class="form-checkbox"> <input
+			type="checkbox" id="cache" ng-checked="nounvalues.cacheable"
+			ng-model="nounvalues.cacheable"> <span>Cache Enabled</span>
+		</label>
+	</div>
+	</accordion-group> <accordion-group heading="Documentation" class="docs">
+	<textarea data-ng-model="nounvalues.notes" data-ck-editor></textarea> </accordion-group>
+	</accordion>
+	<div class="action">
+		<span ng-if="mode=='create'">
+			<button class="btn btn-success" type="button" ng-click="submitNoun()"
+				ng-disabled="!nounvalues.name || $root.myForm.name.$invalid || $root.myForm.name.$pending || $root.myForm1.$invalid || $root.myForm1.$pending">Create</button>
+			<button class="btn btn-info" type="reset" ng-click="cancelNoun()">Cancel</button>
+		</span> <span ng-if="mode=='update'">
+			<button class="btn btn-success" type="button" ng-click="updateNoun()"
+    ng-disabled="!nounvalues || $root.myForm.name.$invalid || $root.myForm.name.$pending || $root.myForm1.$invalid || $root.myForm1.$pending" >Update</button>
+			<button class="btn btn-danger" type="button"
+				ng-disabled="!nounvalues" id="btnStickUpSizeToggler"
+				ng-click="deleteNoun()">Delete</button>
+			<button class="btn btn-info" type="reset" ng-click="cancelNoun()">Cancel</button>
+		</span>
+	</div>
+	</tab> </tabset>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>

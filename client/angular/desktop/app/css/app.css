@@ -62,16 +62,19 @@
     font-weight: 400;
 }
 
-.form-checkbox input[type="checkbox"], .form-radio input[type="radio"] {
+.form-checkbox input[type="checkbox"],
+.form-radio input[type="radio"] {
     display: none;
 }
 
-.form-checkbox input[type="checkbox"] + span, .form-radio input[type="radio"] + span {
+.form-checkbox input[type="checkbox"] + span,
+.form-radio input[type="radio"] + span {
     align-items: center;
     display: flex;
 }
 
-.form-checkbox input[type="checkbox"] + span::before, .form-radio input[type="radio"] + span::before {
+.form-checkbox input[type="checkbox"] + span::before,
+.form-radio input[type="radio"] + span::before {
     border: 1px solid #0fbaf3;
     content: '';
     display: flex;
@@ -102,7 +105,7 @@
 
 .form-radio input[type="radio"] + span::before {
     border-radius: 100%;
-    transition: border 0.3s 0s cubic-bezier(0.455, 0.03, 0.215, 1.33);
+    transition: border 0.1s 0s cubic-bezier(0.455, 0.03, 0.215, 1.33);
 }
 
 .form-radio input[type="radio"]:checked + span::before {
@@ -175,25 +178,26 @@ html, body {
 .app header .menu ul li {
     display: flex;
 }
-.title_project .lead {
-	margin: 0;
-}
+
 .app header .menu ul li a {
     align-self: center;
     color: #fff;
     cursor: pointer;
+    display: flex;
     font-size: 90%;
-    font-weight: 200;
+    font-weight: 300;
     margin: 0 15px;
     text-decoration: none;
     text-transform: uppercase;
 }
 
-.app header .menu ul li.active a, .app header .menu ul li a:hover {
+.app header .menu ul li.active a,
+.app header .menu ul li a:hover {
     border-bottom: 1px solid #fff;
 }
 
-.app header .menu ul .sign-in a .fa, .app header .menu ul .sign-out a .fa {
+.app header .menu ul .sign-in a .fa,
+.app header .menu ul .sign-out a .fa {
     display: flex;
     font-size: 150%;
     padding: 0 10px 0 0;
@@ -218,13 +222,17 @@ html, body {
     font-size: 120%;
 }
 
-.app footer .get-in-touch, .app footer .information, .app footer .social,
+.app footer .get-in-touch,
+.app footer .information,
+.app footer .social,
 .app footer .contacts {
     display: flex;
     flex-direction: column;
 }
 
-.app footer .get-in-touch .work-hours, .app footer .information ul, .app footer .social ul {
+.app footer .get-in-touch .work-hours,
+.app footer .information ul,
+.app footer .social ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -266,7 +274,8 @@ html, body {
     display: flex;
 }
 
-.app footer .contacts address:hover .fa, .app footer .contacts a:hover .fa {
+.app footer .contacts address:hover .fa,
+.app footer .contacts a:hover .fa {
     color: #fff;
 }
 
@@ -374,7 +383,8 @@ html, body {
     padding: 10px;
 }
 
-.app .login .form .social .facebook .fa, .app .login .form .social .google-plus .fa {
+.app .login .form .social .facebook .fa,
+.app .login .form .social .google-plus .fa {
     font-size: 150%;
 }
 
@@ -393,28 +403,6 @@ html, body {
     display: flex;
     flex-basis: 550px;
     justify-content: center;
-}
-
-.lead {
-	margin: 0;
-}
-
-.app header .menu .dropdown-menu{
-	display:none;
-}
-.app header .menu .open>.dropdown-menu{
-	display:block;
-}
-
-.app header .menu .dropdown-menu li{
-	display: list-item;
-}
-.app header .menu .dropdown-menu li a{
-	color:#333;
-	margin: 0;
-}
-.container_menu {
-	display: flex;
 }
 
 .app .home .hero .lead {
@@ -439,18 +427,28 @@ html, body {
     padding: calc(60px + 3%) 10% 3%;
 }
 
-.app .projects .add, .app .project .activities .add, .app .project .nouns .add {
+.app .projects .add,
+.app .project .activities .add,
+.app .project .nouns .add,
+.app .project .templates .add {
     align-items: baseline;
     align-self: flex-end;
     color: #fff;
     display: flex;
 }
 
-.app .projects .add .fa, .app .project .activities .add .fa, .app .project .nouns .add .fa {
+.app .projects .add .fa,
+.app .project .activities .add .fa,
+.app .project .nouns .add .fa,
+.app .project .templates .add .fa {
+    align-self: center;
     padding: 0 5px 0 0;
 }
 
-.app .projects ul, .app .project .activities ul, .app .project .nouns ul {
+.app .projects ul,
+.app .project .activities ul,
+.app .project .nouns ul,
+.app .project .templates ul {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
@@ -458,7 +456,10 @@ html, body {
     padding: 2% 0;
 }
 
-.app .projects ul li, .app .project .activities ul li, .app .project .nouns ul li {
+.app .projects ul li,
+.app .project .activities ul li,
+.app .project .nouns ul li,
+.app .project .templates ul li {
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -468,13 +469,17 @@ html, body {
     margin: 0 5% 3% 0;
 }
 
-.app .projects ul li:nth-child(3n), .app .project .activities ul li:nth-child(3n),
-.app .project .nouns ul li:nth-child(3n) {
+.app .projects ul li:nth-child(3n),
+.app .project .activities ul li:nth-child(3n),
+.app .project .nouns ul li:nth-child(3n),
+.app .project .templates ul li:nth-child(3n) {
     margin-right: 0;
 }
 
-.app .projects ul li .title, .app .project .activities ul li .title,
-.app .project .nouns ul li .title {
+.app .projects ul li .title,
+.app .project .activities ul li .title,
+.app .project .nouns ul li .title,
+.app .project .templates ul li .title {
     background: #48b0f7;
     color: #fff;
     font-size: 125%;
@@ -483,31 +488,41 @@ html, body {
     word-wrap: break-word;
 }
 
-.app .projects ul li .label, .app .project .activities ul li .label,
-.app .project .nouns ul li .label {
+.app .projects ul li .label,
+.app .project .activities ul li .label,
+.app .project .nouns ul li .label,
+.app .project .templates ul li .label {
     color: #000;
     font-size: 105%;
     padding: 5px 15px;
     text-align: left;
 }
 
-.app .projects ul li .description, .app .project .activities ul li .description,
-.app .project .nouns ul li .description {
+.app .projects ul li .description,
+.app .project .activities ul li .description,
+.app .project .nouns ul li .description,
+.app .project .templates ul li .description {
     display: flex;
     flex: 1;
     padding: 0 15px;
     word-wrap: break-word;
 }
 
-.app .projects ul li .action, .app .project .activities ul li .action,
-.app .project .nouns ul li .action {
+.app .projects ul li .action,
+.app .project .activities ul li .action,
+.app .project .nouns ul li .action,
+.app .project .templates ul li .action {
     padding: 15px;
     text-align: center;
 }
 
 /* === Project Update ==== */
 
-.app .project, .app .activity, .app .noun, .app .contact, .app .about,
+.app .project,
+.app .activity,
+.app .noun,
+.app .contact,
+.app .about,
 .app .services {
     display: flex;
     flex: 1;
@@ -523,11 +538,13 @@ html, body {
     text-align: center;
 }
 
-.app .project .tabs .nav-tabs li a, .app .activity .tabs .nav-tabs li a {
+.app .project .tabs .nav-tabs li a,
+.app .activity .tabs .nav-tabs li a {
     color: #555;
 }
 
-.app .project .tabs .tab-content, .app .activity .tabs .tab-content,
+.app .project .tabs .tab-content,
+.app .activity .tabs .tab-content,
 .app .noun .tabs .tab-content {
     background: #fff;
     border: 1px solid #ddd;
@@ -571,7 +588,8 @@ html, body {
     justify-content: space-around;
 }
 
-.app .project .general .architecture .client, .app .project .general .architecture .server,
+.app .project .general .architecture .client,
+.app .project .general .architecture .server,
 .app .project .general .architecture .miscellaneous {
     width: 30%;
 }
@@ -614,7 +632,7 @@ html, body {
     width: 90%;
 }
 
-.app .project .user-activities .activities, .app .project .user-nouns .nouns {
+.app .project .user-activities .activities, .app .project .user-nouns .nouns, .app .project .user-templates .templates {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -753,7 +771,7 @@ html, body {
 }
 
 /* modal margin fixes
-   Modified : July 15 2015
+   Modified: July 15 2015
    @Author: pravin 
 */
 .modal-dialog {
@@ -762,25 +780,30 @@ html, body {
 
 .modal-header {
     background: linear-gradient(90deg, #3a7bd5, #0fbaf3);
-    width: 100%;
+    border-radius: 5px 5px 0 0;
     color: #fff;
+    width: 100%;
 }
 
-.delete-confirmation{
-  text-align: center;
-  margin-bottom: 10px;
-  background-color: antiquewhite;
-  padding: 20px;
+.modal-header .modal-title {
+    font-size: 115%;
+}
+
+.delete-confirmation {
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: antiquewhite;
+    padding: 20px;
 }
 
 /* === Menu design ===  */
 .app .project .menu .properties {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .app .project .menu .properties .item {
-	width: 50%;
-	padding: 1px 12px;
+    width: 50%;
+    padding: 1px 12px;
 }

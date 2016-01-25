@@ -27,12 +27,12 @@
 		$scope.SaveCareGiver = function(careGiverForm,CareGiverDetails) {
 			$log.log("Inside the customer Details controller");
 			if (careGiverForm.$valid) {
-					//var careGiver = "http://localhost:8080/sloan_test/careGiver/create"
+					//var careGiver = "http://localhost:8080/SlaonAlone/careGiver/create"
 				var careGiver = "http://45.55.156.148:8080/Sloan_app_ionic/careGiver/create"
 					$log.log("Inside the customer Details checking",angular.toJson(CareGiverDetails));
 					
 					$scope.CareGiverDetails.user=userService.UserObject;
-					
+					$log.log("careGiver created --", angular.toJson($scope.CareGiverDetails));
 					$http({
 						method:"POST",
 						url : careGiver,
@@ -42,7 +42,7 @@
 					        'Accept': 'application/json'
 						}
 					}).success (function(data) {
-							$log.log("careGiver created --", data);
+							//$log.log("careGiver created --", angular.toJson(data));
 							$location.url("/en-US/login");						 
 						})
 						.error(function(data) {

@@ -1,0 +1,52 @@
+<header class="user" data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="activity" ng-controller="ProjectTemplateCtrl as actCtrl">
+   <h1 class="title">Project Template Designer</h1>
+   <div class="info">
+      <h3 class="title">Mobile</h3>
+      <form name="$root.myForm">
+         <div class="general">
+            <div class="item">
+               <label for="name">Template To Use</label>
+               <select class="form-control" name="templateId" ng-model="projectTemplate.templateId" ng-change="getTemplateComponents(template)" autofocus="autofocus" ng-options="template.templateId as template.label for template in templates | orderBy:'label'">
+                  <option value="">---Select---</option>
+               </select>
+            </div>
+            <div class="item">
+               <label for="label">Color</label>
+               <input colorpicker="hex" type="text" ng-model="projectTemplate.color" class="form-control" placeholder="Color" name="color" autofocus="autofocus">
+            </div>
+         </div>
+         <accordion close-others="true">
+            <accordion-group heading="Header" class="screens" is-open="true">
+               <div class="general">
+                  <div class="item" data-ng-repeat="object in projectTemplate.templateComponents | filter : { templateSection: 'header' }">
+                     <label for="label">{{object.label}}</label> <input type="text"
+                        class="form-control" placeholder="{{object.label}}" 
+                        autofocus="autofocus" ng-model="object.templateComponentValue">
+                  </div>
+               </div>
+            </accordion-group>
+            <accordion-group heading="Footer" class="screens" is-open="true">
+               <div class="item" data-ng-repeat="object in projectTemplate.templateComponents | filter : { templateSection: 'footer' }">
+                  <label for="label">{{object.label}}</label> <input type="text"
+                     class="form-control" placeholder="{{object.label}}" 
+                     autofocus="autofocus" ng-model="object.templateComponentValue">
+               </div>
+            </accordion-group>
+            <accordion-group heading="About" class="screens" is-open="true">
+               <div class="item" data-ng-repeat="object in projectTemplate.templateComponents | filter : { templateSection: 'about' }">
+                  <label for="label">{{object.label}}</label> <input type="text"
+                     class="form-control" placeholder="{{object.label}}" 
+                     autofocus="autofocus" ng-model="object.templateComponentValue">
+               </div>
+            </accordion-group>
+         </accordion>
+      </form>
+   </div>
+   <div class="action">
+      <button class="btn success" ng-click="updateProjectTemplate()">Update</button>
+      <button class="btn btn-danger" ng-click="deleteProjectTemplate()">Delete</button>
+      <button class="btn btn-info" ng-click="cancelProjectTemplate()">Cancel</button>
+   </div>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>
